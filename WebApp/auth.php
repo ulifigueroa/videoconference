@@ -3,16 +3,16 @@
 * VoxImplant HTTP API access info
 */
 define("API_URL", "https://api.voximplant.com/platform_api/");
-define("API_KEY", getenv('API_KEY'));
-define("ACCOUNT_NAME", getenv('ACCOUNT_NAME'));
+define("API_KEY", getenv("API_KEY"));
+define("ACCOUNT_NAME", getenv("ACCOUNT_NAME"));
 /**
 * Some default user password
 */
-define("PWD", "testpass");
+define("PWD", getenv("PWD"));
 /**
 * VoxImplant Application name
 */
-define("APP_NAME", "videoconf");
+define("APP_NAME", getenv("APP_NAME"));
 
 /**
 * Generate random username
@@ -32,7 +32,7 @@ function generateUsername($random_string_length) {
 */
 function httpRequest($url,$params = array()) {
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, $url);	
+	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 	if (isset($params["post"])) curl_setopt($ch, CURLOPT_POST, 1);
 	if (isset($params["post_data"])) curl_setopt($ch, CURLOPT_POSTFIELDS, $params["post_data"]);
@@ -44,14 +44,14 @@ function httpRequest($url,$params = array()) {
 
 /**
 * Create user for video conference
-*/ 
+*/
 function createUser($displayName = "Participant") {
 	$username = generateUsername(10);
-	$url = API_URL . "AddUser/?" . 
+	$url = API_URL . "AddUser/?" .
 			"account_name=" . ACCOUNT_NAME .
-			"&api_key=" . API_KEY . 
+			"&api_key=" . API_KEY .
 			"&user_name=" . $username .
-			"&user_display_name=" . $displayName .  
+			"&user_display_name=" . $displayName .
 			"&user_password=" . PWD;
 
 	$result = httpRequest($url);
@@ -63,9 +63,9 @@ function createUser($displayName = "Participant") {
 */
 function bindUser($username) {
 
-	$url = API_URL . "BindUser/?" . 
+	$url = API_URL . "BindUser/?" .
 			"account_name=" . ACCOUNT_NAME .
-			"&api_key=" . API_KEY . 
+			"&api_key=" . API_KEY .
 			"&user_name=" . $username .
 			"&application_name=" . APP_NAME;
 
@@ -92,7 +92,7 @@ function initUser($displayName) {
 	} else {
 		echo json_encode(array("result" => "ERROR"));
 		exit;
-	}	
+	}
 
 }
 
@@ -115,7 +115,7 @@ if (isset($_REQUEST['key']) && isset($_REQUEST['username'])) {
 	switch($action) {
 		case "JOIN_CONFERENCE":
 			// Create user via API and return his name to SDK for login
-			initUser($displayName);			
+			initUser($displayName);
 		break;
 	}
 } else {
