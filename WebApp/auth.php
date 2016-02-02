@@ -8,7 +8,7 @@ define("ACCOUNT_NAME", getenv("ACCOUNT_NAME"));
 /**
 * Some default user password
 */
-define("PWD", getenv("PWD"));
+define("PASS", getenv("PASS"));
 /**
 * VoxImplant Application name
 */
@@ -52,10 +52,10 @@ function createUser($displayName = "Participant") {
 			"&api_key=" . API_KEY .
 			"&user_name=" . $username .
 			"&user_display_name=" . $displayName .
-			"&user_password=" . PWD;
+			"&user_password=" . PASS;
 
 
-			echo "pass: ". PWD ."/n";
+			echo "pass: ". PASS ."/n";
 			echo "url: ". $url ."/n";
 
 	$result = httpRequest($url);
@@ -107,7 +107,7 @@ function initUser($displayName) {
 * Calculate hash for VoxImplant loginWithOneTimeKey
 */
 function calculateHash($key, $username) {
-	$hash = md5($key . "|" . md5($username . ":voximplant.com:" . PWD));
+	$hash = md5($key . "|" . md5($username . ":voximplant.com:" . PASS));
 	return $hash;
 }
 
