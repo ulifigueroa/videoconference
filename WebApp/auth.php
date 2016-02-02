@@ -54,10 +54,6 @@ function createUser($displayName = "Participant") {
 			"&user_display_name=" . $displayName .
 			"&user_password=" . PASS;
 
-
-			echo "pass: ". PASS ."/n";
-			echo "url: ". $url ."/n";
-
 	$result = httpRequest($url);
 	return array('api_result' => json_decode($result, true), 'username' => $username);
 }
@@ -83,8 +79,6 @@ function bindUser($username) {
 function initUser($displayName) {
 
 	$create_result = createUser($displayName);
-
-	echo $create_result;
 
 	if ($create_result['api_result']['result'] == 1) {
 		$bind_result = bindUser($create_result['username']);
