@@ -157,7 +157,7 @@
 			$('div.spinner').remove();
 			connected = true;
 			$('body').append('<div id="control_panel" class="uk-grid"><div class="uk-width-1-1"><img src="https://manage.voximplant.com/img/logo.png" />&nbsp;&nbsp;&nbsp;<form class="uk-form"><fieldset data-uk-margin>Access URL&nbsp;&nbsp;<input id="accessURL_input" type="text" class="uk-form-width-large"></fieldset></form>&nbsp;&nbsp;&nbsp;Access Number '+accessNumber+' PIN '+conferenceId+'&nbsp;&nbsp;&nbsp;<a href="#pstnParticipant" class="uk-button uk-button-primary" data-uk-modal>Add Participant</a></div></div>');
-			$('#accessURL_input').val("https://demos.zingaya.com/videoconf2/?conferenceId="+conferenceId).on("click", function () {
+			$('#accessURL_input').val("https://voximplant-room.herokuapp.com/WebApp/?conferenceId="+conferenceId).on("click", function () {
    					$(this).select();
 				});
 		}
