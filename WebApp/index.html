@@ -269,7 +269,7 @@
 					// Calling all peers with callerid < username
 					if (result.peers[i].callerid < username && !callExists(result.peers[i].callerid)) {
 						log("Calling "+result.peers[i].displayName+" ("+result.peers[i].callerid+")");
-						var newcall = voxAPI.call(result.peers[i].callerid, true, null, {"X-DirectCall": "true", "X-DisplayName": result.peers[i].displayName});
+						var newcall = voxAPI.call(result.peers[i].callerid, true, null, {"X-DisplayName": result.peers[i].displayName});
 						peerCalls.push({call: newcall, displayName: result.peers[i].displayName});
 						newcall.addEventListener(VoxImplant.CallEvents.Connected, outboundP2Pcall_connected);
 						newcall.addEventListener(VoxImplant.CallEvents.RemoteScreenCaptureStarted, function(e){
@@ -293,7 +293,7 @@
 
 			} else if (result.type == "ICE_FAILED") {
 				// if ICE_FAILED we should try to call again
-				var newcall = voxAPI.call(result.callee, true, null, {"X-DirectCall": "true", "X-DisplayName": result.displayName});
+				var newcall = voxAPI.call(result.callee, true, null, {"X-DisplayName": result.displayName});
 				peerCalls.push({call: newcall, displayName: result.displayName});
 				newcall.addEventListener(VoxImplant.CallEvents.Connected, outboundP2Pcall_connected);
 				newcall.addEventListener(VoxImplant.CallEvents.RemoteScreenCaptureStarted, function(e){
